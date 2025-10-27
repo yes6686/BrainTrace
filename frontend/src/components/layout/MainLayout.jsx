@@ -250,7 +250,7 @@ function MainLayout() {
       </div>
 
       {/* === 중앙 패널 그룹: 소스 - 채팅 - 인사이트 === */}
-      <PanelGroup direction="horizontal" className="panels-container">
+      <PanelGroup direction="vertical" className="panels-container">
         {/* === 1. Source 패널 === */}
         <Panel
           ref={sourcePanelRef}

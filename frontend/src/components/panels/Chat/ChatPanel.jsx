@@ -1710,7 +1710,7 @@ function ChatPanel({
           <div className="chat-panel-centered-input-container">
             <div className="chat-panel-hero-section">
               <h1 className="chat-panel-hero-title">
-                지식 그래프와 대화하여 인사이트를 발견하세요.
+                대화를 시작해 숨은 인사이트를 만나보세요.
               </h1>
             </div>
             <form className="chat-panel-input-wrapper" onSubmit={handleSubmit}>

@@ -588,7 +588,7 @@ export default function FileView({
         uploadQueue.length === 0 && (
           <div className="empty-state">
             <p className="empty-sub">
-              이 영역에 파일을 <strong>드래그해서 추가</strong>해보세요!
+              이 영역에 파일을 <strong>드래그해서 추가</strong>해보세요
             </p>
             <div className="supported-formats">
               <p className="format-title">지원하는 파일 형식</p>
@@ -596,7 +596,6 @@ export default function FileView({
                 <span className="format-item">PDF</span>
                 <span className="format-item">TXT</span>
                 <span className="format-item">DOCX</span>
-                <span className="format-item">MARKDOWN</span>
               </div>
             </div>
           </div>

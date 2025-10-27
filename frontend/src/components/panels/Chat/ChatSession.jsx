@@ -276,12 +276,14 @@ function ChatSession({
         ) : sessions.length === 0 ? (
           <li className="chat-session-empty-item">
             <div className="chat-session-empty-content">
-              <div className="chat-session-empty-icon">💬</div>
+              <div className="chat-session-empty-icon"></div>
               <div className="chat-session-empty-title">
-                첫 번째 대화를 시작해보세요
+                오늘의 인사이트를 함께 찾아볼까요?
               </div>
               <div className="chat-session-empty-description">
-                새로운 아이디어를 탐색하고 질문에 답변을 받아보세요
+                분석이 필요할 때, Executive Copilot이 도와드립니다.
+                <br />
+                데이터 기반 의사결정을 지금 바로 시작하세요!
               </div>
             </div>
           </li>

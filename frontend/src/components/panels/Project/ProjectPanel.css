@@ -10,11 +10,11 @@
   --text-muted: #adb5bd;
   --border-color: #dee2e6;
   --hover-bg: #f1f3f4;
-  --active-bg: #e3f2fd;
-  --active-border: #2196f3;
+  --active-bg: #dee2e6;
+  --active-border: #6c757d;
   --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08);
   --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.12);
-  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-primary:#707982;
   --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
 
