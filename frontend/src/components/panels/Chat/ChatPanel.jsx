@@ -615,7 +615,7 @@ const ChatInput = ({
           }}
           disabled={isLoading}
         />
-        <div className="chat-panel-source-count-text">소스 {sourceCount}개</div>
+        {/* <div className="chat-panel-source-count-text">소스 {sourceCount}개</div> */}
         <ModelDropdown
           ref={modelDropdownRef}
           selectedModel={selectedModel}
@@ -720,11 +720,7 @@ const ChatMessage = ({
                         <span style={{ color: "inherit" }}>-</span>
                         <span
                           className="chat-panel-referenced-node-text"
-                          onClick={() => {
-                            if (typeof onReferencedNodesUpdate === "function") {
-                              onReferencedNodesUpdate([nodeName]);
-                            }
-                          }}
+                          style={{ cursor: "default" }}
                         >
                           {nodeName.replace(/\*/g, "")}
                         </span>
@@ -833,8 +829,8 @@ const ChatMessage = ({
             </button>
           )}
         </div>
-        {/* 정확도 표시 (AI 답변에만, 정보가 없는 경우 제외) */}
-        {message.is_ai &&
+        {/* 정확도 표시 숨김 */}
+        {/* {message.is_ai &&
           message.accuracy !== null &&
           message.accuracy !== undefined &&
           !message.message.includes("지식그래프에 해당 정보가 없습니다") && (
@@ -854,10 +850,10 @@ const ChatMessage = ({
               </span>
               <span className="chat-panel-accuracy-help">?</span>
             </div>
-          )}
+          )} */}
 
         {/* 정보가 없는 경우 친절한 안내 메시지 */}
-        {message.is_ai &&
+        {/* {message.is_ai &&
           message.message.includes("지식그래프에 해당 정보가 없습니다") && (
             <div
               className="chat-panel-accuracy-display"
@@ -883,7 +879,7 @@ const ChatMessage = ({
                 정확한 답변을 드릴 수 있습니다.
               </span>
             </div>
-          )}
+          )} */}
       </div>
     </div>
   );

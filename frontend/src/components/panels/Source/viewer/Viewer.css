@@ -3,6 +3,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    background: white;
 }
 
 .viewer-header {
@@ -92,8 +93,8 @@
     background: white;
     color: #000;
     text-align: left;
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     width: 100%;
     min-height: calc(100vh - 120px);
     box-sizing: border-box;
@@ -103,7 +104,7 @@
 .viewer-pre > * {
     text-align: left;
     width: 100%;
-    max-width: 800px;
+    max-width: 100%;
 }
 
 .viewer-pre:hover {
@@ -144,13 +145,14 @@
     background: white;
     border: 1px solid #e0e0e0;
     border-radius: 6px;
-    margin: 16px auto;
+    margin: 0;
     padding: 20px;
     line-height: 1.6;
     font-size: 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     text-align: left;
-    width: calc(100% - 32px);
+    width: 100%;
+    max-width: 100%;
     height: calc(100vh - 200px);
     box-sizing: border-box;
     cursor: text;
@@ -419,7 +421,7 @@
     border: none;
     border-radius: 0;
     box-shadow: none;
-    margin: 0 auto;
+    margin: 0;
     position: relative;
     backdrop-filter: none;
     display: block;
@@ -430,8 +432,8 @@
     padding: 15px;
     color: #000;
     text-align: left;
-    max-width: 800px;
-    width: 96%;
+    max-width: 100%;
+    width: 100%;
     box-sizing: border-box;
     cursor: text;
 }
@@ -534,7 +536,7 @@
 
 /* 출처보기에서 통합된 배경 스타일 */
 .viewer-container[data-source-view="true"] .viewer-content {
-    background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+    background: white;
 }
 
 /* 출처보기 안내 메시지 스타일 */
@@ -558,7 +560,7 @@
     border: 1px solid #f0f0f0;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    margin: 8px;
+    margin: 0;
     position: relative;
     backdrop-filter: blur(5px);
     display: block;

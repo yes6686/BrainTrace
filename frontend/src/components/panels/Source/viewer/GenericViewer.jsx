@@ -493,7 +493,7 @@ export default function GenericViewer({
       {/* 텍스트 콘텐츠 영역 */}
       <div className="viewer-content" ref={containerRef}>
         {/* 출처보기 안내 메시지 */}
-        {isFromSourceView && (
+        {/* {isFromSourceView && (
           <div className="source-view-notice">
             <MdOutlineSource className="source-view-notice-icon" />
             <span className="source-view-notice-text">
@@ -501,7 +501,7 @@ export default function GenericViewer({
               하이라이트된 부분이 답변의 근거가 되는 내용입니다.
             </span>
           </div>
-        )}
+        )} */}
 
         {/* 오류 메시지 표시 */}
         {error && (
