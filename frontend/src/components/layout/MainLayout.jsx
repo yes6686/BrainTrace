@@ -90,6 +90,7 @@ function MainLayout() {
   // === 로딩 상태 ===
   // const [isProjectLoading, setIsProjectLoading] = useState(false); // 프로젝트 이동 중 로딩 상태 (제거됨)
   const [isNodeViewLoading, setIsNodeViewLoading] = useState(null); // 노드 보기 로딩 상태
+  const [isFileUploading, setIsFileUploading] = useState(false); // 파일 업로드 중 상태
 
   // === 외부 윈도우 동기화 ===
   // 그래프 상태를 외부 윈도우(localStorage)로 동기화하는 함수
@@ -244,6 +245,7 @@ function MainLayout() {
         <ProjectPanel
           selectedBrainId={Number(selectedBrainId)}
           onProjectChange={handleProjectChange}
+          isFileUploading={isFileUploading}
         />
       </div>
 
@@ -276,6 +278,7 @@ function MainLayout() {
               onSourcePanelReady={() => {}} // 제거됨 - ready 대기 안 함
               isNodeViewLoading={isNodeViewLoading}
               setIsNodeViewLoading={setIsNodeViewLoading}
+              onUploadStateChange={setIsFileUploading}
             />
           </div>
         </Panel>
