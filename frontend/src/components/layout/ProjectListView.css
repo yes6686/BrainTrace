@@ -2,7 +2,7 @@
 
 /* ====== 전체 페이지/뷰 ====== */
 .project-list-page {
-    background: #fff;
+    background: #b7bec8; ;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
