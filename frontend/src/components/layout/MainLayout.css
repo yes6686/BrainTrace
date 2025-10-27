@@ -1,11 +1,33 @@
-/* src/components/layout/MainLayout.css */
+/* MainLayout.css - Pastel Light Gray & White/Black Text Theme */
+
+/* ======  테마 변수 정의 ====== */
+:root {
+  --bg-primary: #bfc4d1;      /* 전체 배경 (아주 연한 파스텔 회색) */
+  --bg-secondary: #ffffff;    /* 패널, 카드 (흰색) */
+  --bg-tertiary: #e6e8eb;     /* 호버, 입력창 (연한 회색) */
+  
+  --accent-primary: #6c757d;  /* 버튼, 포인트 컬러 (차분한 중간 회색) */
+  --accent-selection: #d0d3d8; /* 선택 항목 배경 (살짝 진한 연회색) */
+  --accent-selection-border: #6c757d; /* 선택 항목 테두리 (포인트 회색) */
+  --accent-glow: rgba(108, 117, 125, 0.2); /* 은은한 회색 글로우 */
+
+  --text-primary: #343a40;     /* 기본 텍스트 (진한 검은색에 가까운 회색) */
+  --text-secondary: #6c757d;   /* 보조 텍스트 (차분한 중간 회색) */
+  --text-on-accent: #ffffff;  /* 버튼 위 텍스트 (흰색) - 버튼 배경이 어두워질 경우 */
+  --text-on-light-bg-button: #343a40; /* 밝은 배경 버튼 위 텍스트 (진한 회색) */
+  
+  --border-color: #dee2e6;    /* 기본 경계선 (연회색) */
+  --shadow-color: rgba(0, 0, 0, 0.08); /* 부드러운 그림자 */
+}
+
+/* ====== 📐 메인 레이아웃 ====== */
 .main-container {
   display: flex;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-color: #ffffff;
-  color: #333333;
+  background-color: var(--bg-primary); 
+  color: var(--text-primary); 
 }
 
 /* 고정 프로젝트 패널 */
@@ -14,8 +36,8 @@
   min-width: 50px;
   max-width: 250px;
   height: 100%;
-  background-color: #f0f8ff;
-  border-right: 1px solid #e0e0e0;
+  background-color: var(--bg-secondary); 
+  border-right: 1px solid var(--border-color); 
   overflow: hidden;
 }
 
@@ -23,6 +45,7 @@
 .panels-container {
   flex: 1;
   height: 100%;
+  background-color: var(--bg-primary); 
 }
 
 /* 내부 패널 스타일 */
@@ -30,7 +53,8 @@
   height: 100%;
   width: 100%;
   overflow: hidden;
-  border-right: 1px solid #e0e0e0;
+  background-color: var(--bg-secondary); 
+  border-right: 1px solid var(--border-color); 
 }
 
 /* 접힌 패널 스타일 */
@@ -45,86 +69,81 @@
   height: 100%;
 }
 
-/* 접힌 패널 컴포넌트 스타일 */
 .panel-container.collapsed {
   width: 45px;
   min-width: 45px;
 }
 
-/* 리사이즈 핸들 */
+/* ====== ↔️ 리사이즈 핸들 ====== */
 .resize-handle {
   width: 1px;
-  background-color: #e0e0e0;
+  background-color: var(--border-color); 
   cursor: col-resize;
   position: relative;
+  transition: background-color 0.2s ease;
 }
 
-/* 리사이즈 핸들 hover 상태 */
 .resize-handle:hover {
-  background-color: #bbbbbb;
+  background-color: var(--accent-primary); /* 포인트 회색 */
+  width: 3px; 
+  margin: 0 -1px;
 }
 
-/* 리사이즈 핸들 내부 선 */
 .handle-line {
   position: absolute;
   top: 0;
   left: 0;
   width: 1px;
   height: 100%;
-  background-color: #e0e0e0;
+  background-color: var(--border-color); 
 }
 
-/* 패널 헤더 스타일 */
+/* ====== 📄 패널 헤더 ====== */
 .panel-header {
   display: flex;
   align-items: center;
   height: 45px;
   padding: 10px 16px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--border-color); 
+  background-color: var(--bg-secondary); 
 }
 
-/* 소스 패널 내용 영역 */
 .source-inner .panel-content {
   height: calc(100% - 45px);
-  /* 헤더 높이 제외 */
   overflow: auto;
 }
 
-/* 접힌 소스 패널 스타일 */
 .source-inner .panel-container.collapsed .panel-header {
   justify-content: center;
 }
 
-/* 메모 패널 스타일 */
 .insight-inner .header-bar {
   height: 45px;
   padding: 10px 16px;
 }
 
-/* 접힌 메모 패널 스타일 */
 .insight-inner .panel-container.collapsed .header-bar {
   justify-content: center;
 }
 
-/* 헤더 제목 스타일 */
 .header-title {
   font-weight: bold;
   font-size: 18px;
+  color: var(--text-primary); 
 }
 
-/* 헤더 액션 스타일 */
 .header-actions {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-/* 액션 버튼 스타일 */
+/* ====== 🔘 액션 버튼 ====== */
 .action-buttons {
   display: flex;
   gap: 8px;
   padding: 12px 16px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--border-color); 
 }
 
 .add-button {
@@ -133,39 +152,41 @@
   justify-content: center;
   gap: 6px;
   padding: 6px 12px;
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--border-color); 
   border-radius: 4px;
-  background-color: white;
-  color: #666;
+  background-color: var(--accent-primary); /* 포인트 회색 버튼 */
+  color: var(--text-on-accent); /* 흰색 텍스트 */
   font-size: 13px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .add-button:hover {
-  background-color: #f5f5f5;
-  border-color: #ddd;
+  background-color: #5a6268; /* 좀 더 진한 회색 호버 */
+  border-color: #5a6268; 
+  color: var(--text-on-accent); 
 }
 
-/* 스크롤바 스타일 */
+/* ====== 📜 스크롤바 ====== */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--bg-primary); 
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
+  background: #aab2bb; /* 중간 회색 */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1a1;
+  background: #889099; 
 }
 
+/* ======  로딩 오버레이 ====== */
 .loading-overlay {
   position: absolute;
   z-index: 1000;
@@ -173,8 +194,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.7); /* 밝은 오버레이 */
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
