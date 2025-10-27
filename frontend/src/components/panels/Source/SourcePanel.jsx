@@ -466,11 +466,11 @@ export default function SourcePanel({
         }}
       >
         {!collapsed && <span className="header-title">Source</span>}
-        <div
+        {/* 사이드패널 접기/펴기 버튼 숨김 */}
+        {/* <div
           className="header-right-icons"
           style={{ display: "flex", alignItems: "center", gap: "10px" }}
         >
-          {/* 사이드패널 접기/펴기 버튼 */}
           {collapsed ? (
             <VscLayoutSidebarLeftOff
               size={18}
@@ -484,82 +484,12 @@ export default function SourcePanel({
               onClick={() => setCollapsed((prev) => !prev)}
             />
           )}
-        </div>
+        </div> */}
       </div>
 
       {!collapsed && (
         <>
-          <div>
-            {/* 소스가 열려있지 않을 때만 표시 */}
-            {!openedFile && (
-              <div className="action-buttons">
-                {/* 소스 추가 버튼 (아이콘/텍스트 토글) */}
-                <button
-                  className={`pill-button ${
-                    panelWidth < RESPONSIVE_THRESHOLDS.SOURCE ? "icon-only" : ""
-                  }`}
-                  onClick={handleFileSelect}
-                >
-                  {panelWidth < 250 ? (
-                    <MdOutlineDriveFolderUpload size={25} />
-                  ) : (
-                    <>
-                      <span
-                        style={{
-                          fontSize: "1.2em",
-                          fontWeight: 500,
-                          verticalAlign: "middle",
-                          marginTop: "1px",
-                        }}
-                      >
-                        ＋
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "1.08em",
-                          fontWeight: 600,
-                          verticalAlign: "middle",
-                        }}
-                      >
-                        소스
-                      </span>
-                    </>
-                  )}
-                </button>
-                {/* 탐색 버튼 (panelWidth < 250이면 아이콘만, 아니면 아이콘+텍스트) */}
-                <button
-                  className={`pill-button${showSearchInput ? " active" : ""} ${
-                    panelWidth < RESPONSIVE_THRESHOLDS.SEARCH ? "icon-only" : ""
-                  }`}
-                  onClick={handleSearchToggle}
-                >
-                  {panelWidth < 250 ? (
-                    <MdSearch size={25} style={{ verticalAlign: "middle" }} />
-                  ) : (
-                    <>
-                      <MdSearch
-                        size={15}
-                        style={{
-                          verticalAlign: "middle",
-                          marginTop: "1px",
-                          color: "black",
-                        }}
-                      />
-                      <span
-                        style={{
-                          fontSize: "1.08em",
-                          fontWeight: 600,
-                          verticalAlign: "middle",
-                        }}
-                      >
-                        탐색
-                      </span>
-                    </>
-                  )}
-                </button>
-              </div>
-            )}
-          </div>
+          {/* 소스 추가 및 탐색 버튼 숨김 */}
 
           {/* 검색창 표시 여부에 따라 입력창 렌더링 */}
           {showSearchInput && (

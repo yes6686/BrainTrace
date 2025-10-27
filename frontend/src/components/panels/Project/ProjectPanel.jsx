@@ -172,8 +172,8 @@ export default function ProjectPanel({
         }`}
         onClick={isFileUploading ? undefined : () => nav("/")}
       >
-        <IoHomeOutline size={25} />
-        <span>홈으로</span>
+        {/* <IoHomeOutline size={25} />
+        <span>홈으로</span> */}
       </div>
 
       {showModal && (

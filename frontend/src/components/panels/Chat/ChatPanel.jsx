@@ -627,14 +627,15 @@ const ChatInput = ({
           installingModel={installingModel}
           brainInfo={brainInfo}
         />
-        <SearchModeDropdown
+        {/* 빠른 탐색 선택 드롭다운 숨김 */}
+        {/* <SearchModeDropdown
           searchMode={searchMode}
           showSearchModeDropdown={showSearchModeDropdown}
           setShowSearchModeDropdown={setShowSearchModeDropdown}
           handleSearchModeSelect={handleSearchModeSelect}
           selectedModel={selectedModel}
           modelDropdownRef={modelDropdownRef}
-        />
+        /> */}
         <button
           type="submit"
           className="chat-panel-submit-circle-button"
@@ -1743,14 +1744,15 @@ function ChatPanel({
                   installingModel={installingModel}
                   brainInfo={brainInfo}
                 />
-                <SearchModeDropdown
+                {/* 빠른 탐색 선택 드롭다운 숨김 */}
+                {/* <SearchModeDropdown
                   searchMode={searchMode}
                   showSearchModeDropdown={showSearchModeDropdown}
                   setShowSearchModeDropdown={setShowSearchModeDropdown}
                   handleSearchModeSelect={handleSearchModeSelect}
                   selectedModel={selectedModel}
                   modelDropdownRef={modelDropdownRef}
-                />
+                /> */}
                 <button
                   type="submit"
                   className="chat-panel-submit-circle-button"
