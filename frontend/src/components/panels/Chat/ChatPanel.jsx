@@ -1730,9 +1730,9 @@ function ChatPanel({
                     }
                   }}
                 />
-                <div className="chat-panel-source-count-text">
+                {/* <div className="chat-panel-source-count-text">
                   소스 {sourceCount}개
-                </div>
+                </div> */}
                 <ModelDropdown
                   ref={modelDropdownRef}
                   selectedModel={selectedModel}
@@ -1767,9 +1767,9 @@ function ChatPanel({
         </div>
       )}
       {/* 안내 문구 */}
-      <p className="chat-panel-disclaimer">
+      {/* <p className="chat-panel-disclaimer">
         BrainTrace는 학습된 정보 기반으로 응답하며, 실제와 다를 수 있습니다.
-      </p>
+      </p> */}
       {/* 대화 초기화 확인 다이얼로그 */}
       {showConfirm && (
         <ConfirmDialog
