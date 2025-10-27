@@ -39,7 +39,7 @@ import {
 } from "../../../../api/config/apiIndex";
 import { toast } from "react-toastify";
 import FileView from "./FileView";
-import KnowledgeGraphStatusBar from "./KnowledgeGraphStatusBar";
+// import KnowledgeGraphStatusBar from "./KnowledgeGraphStatusBar"; // 숨김 처리
 import {
   VscLayoutSidebarRightOff,
   VscLayoutSidebarLeftOff,
@@ -488,77 +488,7 @@ export default function SourcePanel({
 
       {!collapsed && (
         <>
-          <div>
-            {/* 소스가 열려있지 않을 때만 표시 */}
-            {!openedFile && (
-              <div className="action-buttons">
-                {/* 소스 추가 버튼 (아이콘/텍스트 토글) */}
-                <button
-                  className={`pill-button ${
-                    panelWidth < RESPONSIVE_THRESHOLDS.SOURCE ? "icon-only" : ""
-                  }`}
-                  onClick={handleFileSelect}
-                >
-                  {panelWidth < 250 ? (
-                    <MdOutlineDriveFolderUpload size={25} />
-                  ) : (
-                    <>
-                      <span
-                        style={{
-                          fontSize: "1.2em",
-                          fontWeight: 500,
-                          verticalAlign: "middle",
-                          marginTop: "1px",
-                        }}
-                      >
-                        ＋
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "1.08em",
-                          fontWeight: 600,
-                          verticalAlign: "middle",
-                        }}
-                      >
-                        소스
-                      </span>
-                    </>
-                  )}
-                </button>
-                {/* 탐색 버튼 (panelWidth < 250이면 아이콘만, 아니면 아이콘+텍스트) */}
-                <button
-                  className={`pill-button${showSearchInput ? " active" : ""} ${
-                    panelWidth < RESPONSIVE_THRESHOLDS.SEARCH ? "icon-only" : ""
-                  }`}
-                  onClick={handleSearchToggle}
-                >
-                  {panelWidth < 250 ? (
-                    <MdSearch size={25} style={{ verticalAlign: "middle" }} />
-                  ) : (
-                    <>
-                      <MdSearch
-                        size={15}
-                        style={{
-                          verticalAlign: "middle",
-                          marginTop: "1px",
-                          color: "black",
-                        }}
-                      />
-                      <span
-                        style={{
-                          fontSize: "1.08em",
-                          fontWeight: 600,
-                          verticalAlign: "middle",
-                        }}
-                      >
-                        탐색
-                      </span>
-                    </>
-                  )}
-                </button>
-              </div>
-            )}
-          </div>
+          {/* +소스, +탐색 버튼 숨김 */}
 
           {/* 검색창 표시 여부에 따라 입력창 렌더링 */}
           {showSearchInput && (
@@ -658,14 +588,7 @@ export default function SourcePanel({
         </>
       )}
 
-      {/* KnowledgeGraphStatusBar: 소스가 열려있지 않을 때만 표시 */}
-      {!collapsed && !openedFile && (
-        <KnowledgeGraphStatusBar
-          textLength={dataMetrics.textLength}
-          nodesCount={dataMetrics.nodesCount}
-          edgesCount={dataMetrics.edgesCount}
-        />
-      )}
+      {/* KnowledgeGraphStatusBar 숨김 */}
     </div>
   );
 }

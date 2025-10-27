@@ -153,10 +153,11 @@ export default function ProjectPanel({ selectedBrainId, onProjectChange }) {
         </div>
       </div>
 
-      <div className="sidebar-icon home-icon" onClick={() => nav("/")}>
+      {/* 홈 버튼 숨김 */}
+      {/* <div className="sidebar-icon home-icon" onClick={() => nav("/")}>
         <IoHomeOutline size={25} />
         <span>홈으로</span>
-      </div>
+      </div> */}
 
       {showModal && (
         <NewBrainModal

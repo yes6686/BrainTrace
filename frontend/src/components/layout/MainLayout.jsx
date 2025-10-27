@@ -14,15 +14,13 @@ import ProjectPanel from "../panels/Project/ProjectPanel";
 import SourcePanel from "../panels/Source/SourcePanel";
 import ChatSession from "../panels/Chat/ChatSession";
 import ChatPanel from "../panels/Chat/ChatPanel";
-import InsightPanel from "../panels/Insight/InsightPanel";
-import Spinner from "../common/Spinner";
+// import InsightPanel from "../panels/Insight/InsightPanel"; // 인사이트 패널 숨김
 
 // === 패널 크기 상수 ===
 // 각 패널의 기본 크기, 최소 크기, 접힘 시 크기 정의
 const PANEL = {
-  SOURCE: { DEFAULT: 20, MIN: 10, COLLAPSED: 5 }, // 소스 패널: 기본 20%, 최소 10%, 접힘 시 5%
-  CHAT: { DEFAULT: 45, MIN: 30 }, // 채팅 패널: 기본 45%, 최소 30%
-  INSIGHT: { DEFAULT: 35, MIN: 10, COLLAPSED: 5 }, // 인사이트 패널: 기본 35%, 최소 10%, 접힘 시 5%
+  SOURCE: { DEFAULT: 30, MIN: 10, COLLAPSED: 5 }, // 소스 패널: 기본 30%, 최소 10%, 접힘 시 5%
+  CHAT: { DEFAULT: 70, MIN: 30 }, // 채팅 패널: 기본 70%, 최소 30% (인사이트 패널 숨김으로 65%에서 70%로 증가)
 };
 
 // === 리사이즈 핸들 컴포넌트 ===
@@ -44,7 +42,6 @@ function MainLayout() {
 
   // === 패널 접힘 상태 ===
   const [sourceCollapsed, setSourceCollapsed] = useState(false); // 소스 패널 접힘 여부
-  const [insightCollapsed, setInsightCollapsed] = useState(false); // 인사이트 패널 접힘 여부
 
   // === 그래프 연관 노드 상태 ===
   const [referencedNodes, setReferencedNodes] = useState([]); // 응답에 등장한 노드들 (하이라이팅용)
@@ -81,27 +78,17 @@ function MainLayout() {
   // === 패널 참조 및 크기 관리 ===
   const sourcePanelRef = useRef(null); // 소스 패널 참조
   const chatPanelRef = useRef(null); // 채팅 패널 참조
-  const InsightPanelRef = useRef(null); // 인사이트 패널 참조
   const firstSourceExpand = useRef(true); // 소스 처음 열릴 때 한 번만 확장되도록 하는 플래그
 
   // 패널 크기 상태
   const [sourcePanelSize, setSourcePanelSize] = useState(PANEL.SOURCE.DEFAULT);
   const [chatPanelSize, setChatPanelSize] = useState(PANEL.CHAT.DEFAULT);
-  const [insightPanelSize, setInsightPanelSize] = useState(
-    PANEL.INSIGHT.DEFAULT
-  );
 
   // === UI 상태 관리 ===
   const [isSourceOpen, setIsSourceOpen] = useState(false); // 소스 열림 여부
 
-  // === 패널 준비 상태 ===
-  const [isSourcePanelReady, setSourcePanelReady] = useState(false); // SourcePanel 준비 상태
-  const [isGraphReady, setGraphReady] = useState(false); // 그래프 준비 상태
-  const [isChatReady, setChatReady] = useState(false); // ChatPanel 준비 상태
-  const allReady = isSourcePanelReady && isGraphReady && isChatReady; // 모든 패널 준비 완료 여부
-
   // === 로딩 상태 ===
-  const [isProjectLoading, setIsProjectLoading] = useState(false); // 프로젝트 이동 중 로딩 상태
+  // const [isProjectLoading, setIsProjectLoading] = useState(false); // 프로젝트 이동 중 로딩 상태 (제거됨)
   const [isNodeViewLoading, setIsNodeViewLoading] = useState(null); // 노드 보기 로딩 상태
 
   // === 외부 윈도우 동기화 ===
@@ -131,8 +118,8 @@ function MainLayout() {
   // === 프로젝트 변경 처리 ===
   // 프로젝트 변경 시 모든 상태를 초기화하고 새 프로젝트로 전환하는 함수
   const handleProjectChange = (projectId) => {
-    setIsProjectLoading(true);
-    setSourcePanelReady(false);
+    // setIsProjectLoading(true); // 제거됨
+    // setSourcePanelReady(false); // 제거됨
     setSelectedBrainId(projectId);
     setReferencedNodes([]);
     setFocusNodeNames([]);
@@ -146,7 +133,7 @@ function MainLayout() {
     setIsSourceOpen(false);
     setSourcePanelSize(PANEL.SOURCE.DEFAULT);
     setChatPanelSize(PANEL.CHAT.DEFAULT);
-    setInsightPanelSize(PANEL.INSIGHT.DEFAULT);
+    // setInsightPanelSize(PANEL.INSIGHT.DEFAULT); // 인사이트 패널 숨김 - 제거됨
   };
 
   // === 패널 리사이즈 핸들러 ===
@@ -159,12 +146,6 @@ function MainLayout() {
 
   const handleChatResize = (size) => {
     setChatPanelSize(size);
-  };
-
-  const handleMemoResize = (size) => {
-    if (!insightCollapsed) {
-      setInsightPanelSize(size);
-    }
   };
 
   // === 노드 상태 관리 핸들러 ===
@@ -214,18 +195,17 @@ function MainLayout() {
   };
 
   // === 패널 크기 자동 조정 ===
-  // 소스/채팅/메모 패널의 비율 합이 100%를 초과하거나 부족할 경우 자동으로 정규화
+  // 소스/채팅 패널의 비율 합이 100%를 초과하거나 부족할 경우 자동으로 정규화
   useEffect(() => {
-    if (!sourceCollapsed && !insightCollapsed) {
-      const total = sourcePanelSize + chatPanelSize + insightPanelSize;
+    if (!sourceCollapsed) {
+      const total = sourcePanelSize + chatPanelSize;
       if (Math.abs(total - 100) >= 0.5) {
         const ratio = 100 / total;
         setSourcePanelSize((prev) => +(prev * ratio).toFixed(1));
         setChatPanelSize((prev) => +(prev * ratio).toFixed(1));
-        setInsightPanelSize((prev) => +(prev * ratio).toFixed(1));
       }
     }
-  }, [sourceCollapsed, insightCollapsed]);
+  }, [sourceCollapsed]);
 
   // === 소스 패널 크기 조절 ===
   // 소스 열림 여부나 소스 패널 접힘 여부에 따라 소스 패널 크기 조절
@@ -242,33 +222,12 @@ function MainLayout() {
     }
   }, [isSourceOpen, sourceCollapsed, sourcePanelSize]);
 
-  // === 인사이트 패널 크기 조절 ===
-  // 메모 패널 열림/접힘에 따른 크기 조절
-  useEffect(() => {
-    if (!InsightPanelRef.current) return;
-    if (insightCollapsed) {
-      InsightPanelRef.current.resize(PANEL.INSIGHT.COLLAPSED);
-    } else {
-      InsightPanelRef.current.resize(
-        insightPanelSize === PANEL.INSIGHT.COLLAPSED
-          ? PANEL.INSIGHT.DEFAULT
-          : insightPanelSize
-      );
-    }
-  }, [insightCollapsed]);
-
   // === 프로젝트 변경 감지 ===
   // URL 변경(projectId 변경)에 따라 selectedBrainId 상태 업데이트
   useEffect(() => {
     setSelectedBrainId(projectId);
-    setIsProjectLoading(true);
+    // setIsProjectLoading(true); // 제거됨 - 즉시 로딩 완료
   }, [projectId]);
-
-  // 모든 패널이 준비되면 로딩 상태 해제
-  useEffect(() => {
-    if (isProjectLoading && allReady) setIsProjectLoading(false);
-    // projectId가 바뀔 때만 검사
-  }, [allReady, isProjectLoading, projectId]);
 
   // === 노드 뷰 로딩 상태 관리 ===
   // focusNodeNames가 실제로 변경(즉, 그래프에 반영)될 때 스피너 해제
@@ -280,13 +239,6 @@ function MainLayout() {
 
   return (
     <div className="main-container" style={{ position: "relative" }}>
-      {/* === 프로젝트 로딩 오버레이 === */}
-      {isProjectLoading && (
-        <div className="loading-overlay">
-          <Spinner />
-        </div>
-      )}
-
       {/* === 좌측 프로젝트 선택 패널 === */}
       <div className="layout project-layout">
         <ProjectPanel
@@ -321,7 +273,7 @@ function MainLayout() {
               focusSource={focusSourceId}
               openSourceId={openSourceId}
               highlightingInfo={highlightingInfo}
-              onSourcePanelReady={() => setSourcePanelReady(true)}
+              onSourcePanelReady={() => {}} // 제거됨 - ready 대기 안 함
               isNodeViewLoading={isNodeViewLoading}
               setIsNodeViewLoading={setIsNodeViewLoading}
             />
@@ -344,7 +296,7 @@ function MainLayout() {
                 selectedBrainId={selectedBrainId}
                 onReferencedNodesUpdate={onReferencedNodesUpdate}
                 onOpenSource={handleOpenSource}
-                onChatReady={setChatReady}
+                onChatReady={() => {}} // 제거됨 - ready 대기 안 함
                 sourceCountRefreshTrigger={sourceCountRefreshTrigger}
                 onBackToList={handleBackToList}
                 sessionInfo={sessionInfo}
@@ -353,43 +305,13 @@ function MainLayout() {
               <ChatSession
                 selectedBrainId={selectedBrainId}
                 onSessionSelect={handleSessionSelect}
-                onChatReady={setChatReady}
+                onChatReady={() => {}} // 제거됨 - ready 대기 안 함
               />
             )}
           </div>
         </Panel>
 
-        <ResizeHandle />
-
-        {/* === 3. Insight 패널 === */}
-        <Panel
-          ref={InsightPanelRef}
-          defaultSize={
-            insightCollapsed ? PANEL.INSIGHT.COLLAPSED : PANEL.INSIGHT.DEFAULT
-          }
-          minSize={
-            insightCollapsed ? PANEL.INSIGHT.COLLAPSED : PANEL.INSIGHT.MIN
-          }
-          maxSize={100}
-          className={insightCollapsed ? "panel-collapsed" : ""}
-          onResize={handleMemoResize}
-        >
-          <div className="layout-inner insight-inner">
-            <InsightPanel
-              selectedBrainId={Number(selectedBrainId)}
-              collapsed={insightCollapsed}
-              setCollapsed={setInsightCollapsed}
-              referencedNodes={referencedNodes}
-              graphRefreshTrigger={graphRefreshTrigger}
-              onGraphDataUpdate={handleGraphDataUpdate}
-              focusNodeNames={focusNodeNames}
-              onGraphReady={setGraphReady}
-              setReferencedNodes={setReferencedNodes}
-              setFocusNodeNames={setFocusNodeNames}
-              setNewlyAddedNodeNames={setNewlyAddedNodeNames}
-            />
-          </div>
-        </Panel>
+        {/* === 3. Insight 패널 (숨김) === */}
       </PanelGroup>
     </div>
   );
